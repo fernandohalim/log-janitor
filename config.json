@@ -1,0 +1,11 @@
+{
+    "retention_days": 14,
+    "parent": "D:\\rs-fhalim\\prds\\#NEW\\",
+    "directories": [
+        "prdsanmlypan\\log",
+        "prdsaggregate_atm\\log",
+        "prdsaggregate_pos\\log"
+    ],
+    "backup_parent": "D:\\rs-fhalim\\log-janitor\\backup\\",
+    "log_file": "D:\\rs-fhalim\\log-janitor\\janitor.log"
+}
