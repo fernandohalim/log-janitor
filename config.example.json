@@ -1,0 +1,12 @@
+{
+    "retention_days": 7,
+    "backup_retention_days": 14,
+    "parent": "C:\\path\\to\\services\\",
+    "directories": [
+        "service-a\\log",
+        "service-b\\log",
+        "service-c\\log"
+    ],
+    "backup_parent": "C:\\path\\to\\backup\\",
+    "log_file": "C:\\path\\to\\log-janitor\\janitor.log"
+}

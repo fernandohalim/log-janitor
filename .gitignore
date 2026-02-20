@@ -8,3 +8,6 @@
 # temporary files and archives
 *.tmp
 *.zip
+
+# configuration files
+config.json
