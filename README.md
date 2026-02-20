@@ -1,4 +1,4 @@
-# Log Janitor - Log Cleaner Service
+# log janitor
 
 a lightweight, zero-dependency go microservice designed to archive and clean up old log files on windows servers. 
 
