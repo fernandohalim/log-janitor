@@ -1,0 +1,10 @@
+# compiled binaries
+*.exe
+*.exe~
+
+# log files
+*.log
+
+# temporary files and archives
+*.tmp
+*.zip

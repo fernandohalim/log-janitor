@@ -1,5 +1,6 @@
 {
-    "retention_days": 14,
+    "retention_days": 7,
+    "backup_retention_days": 14,
     "parent": "D:\\rs-fhalim\\prds\\#NEW\\",
     "directories": [
         "prdsanmlypan\\log",

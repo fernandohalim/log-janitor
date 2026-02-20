@@ -1,18 +1,22 @@
 # log janitor
 
-a lightweight, zero-dependency go microservice designed to archive and clean up old log files on windows servers. 
+a lightweight go microservice to archive and clean up old log files on windows servers. 
 
-it scans specified directories, finds files older than a configured retention period, merges them into a zip backup, and then deletes the original files to free up disk space.
+this tool uses a dual-retention system:
+1. keeps recent logs untouched.
+2. zips and archives logs that pass the first age threshold.
+3. permanently deletes logs (even from inside the zip backup) once they pass the second age threshold.
+
+
 
 ## features
-* **json configured:** easily update target directories and retention days without recompiling.
-* **smart archiving:** zips old logs and automatically merges them if a backup zip already exists for that folder.
-* **audit logging:** writes every action (zip, delete, errors) to a local log file.
-* **no background runtime:** runs purely as a compiled `.exe`, perfect for windows task scheduler.
+* **dual retention:** separate rules for archiving vs. permanent deletion.
+* **smart archiving:** merges old logs into existing backup zips and automatically purges expired logs from within the zip.
+* **json configured:** update target directories and retention periods without recompiling.
+* **zero dependencies:** runs as a single compiled `.exe`, perfect for windows task scheduler.
 
 ## installation & build
 1. clone the repository.
-2. open your terminal in the project folder.
-3. compile the executable:
+2. compile the executable:
 ```bash
 go build -o log-janitor.exe main.go
