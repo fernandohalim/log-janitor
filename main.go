@@ -22,7 +22,14 @@ type Config struct {
 }
 
 func main() {
-	configFile, err := os.ReadFile("config.json")
+	exePath, err := os.Executable()
+	if err != nil {
+		fmt.Printf("failed to locate executable: %v\n", err)
+		return
+	}
+	exeDir := filepath.Dir(exePath)
+
+	configFile, err := os.ReadFile(filepath.Join(exeDir, "config.json"))
 	if err != nil {
 		fmt.Printf("failed to read config.json: %v\n", err)
 		return
@@ -83,9 +90,10 @@ func main() {
 		targetZip := filepath.Join(cfg.BackupParent, zipName)
 
 		// check if zip exists to see if we need to run the merge/clean process even if no new files are added
-		_, zipExists := os.Stat(targetZip)
-		
-		if len(filesToBackup) > 0 || zipExists == nil {
+		_, statErr := os.Stat(targetZip)
+		zipAlreadyExists := statErr == nil
+
+		if len(filesToBackup) > 0 || zipAlreadyExists {
 			err := backupAndRemove(targetZip, filesToBackup, deleteThreshold, logger)
 			if err != nil {
 				logger.Printf("failed to process backup for %s: %v", dir, err)
@@ -148,7 +156,7 @@ func backupAndRemove(zipPath string, files []string, deleteThreshold time.Time, 
 		
 		info, _ := f.Stat()
 		header, _ := zip.FileInfoHeader(info)
-		header.Name = filepath.Base(file) 
+		header.Name = strings.ReplaceAll(file, string(filepath.Separator), "_")
 		header.Method = zip.Deflate
 		
 		writer, err := zipWriter.CreateHeader(header)
