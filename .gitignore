@@ -11,3 +11,4 @@
 
 # configuration files
 config.json
+/out
